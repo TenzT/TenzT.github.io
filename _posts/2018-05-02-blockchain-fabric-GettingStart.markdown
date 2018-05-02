@@ -31,7 +31,7 @@ tags:
     ```curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0```
 下载并解压所有与平台有关的二进制可执行文件。
 对应bin目录下的文件：
-![](https://github.com/TenzT/TenzT.github.io/blob/master/img_markdown/20180503-Introduction-binaries.bmp)
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/20180503-Introduction-binaries.bmp)
 
 3. 将fabric-samples/bin的路径加入环境变量（可选）：在~/.bash_profile里添加
     ```
@@ -45,9 +45,9 @@ tags:
 5. 执行byfn例程
     ```./<fabric-samples的路径>/first-network/byfn.sh```
     - 查看对应源代码可见，该例程的运行环境是 4. 中的Docker镜像：
-    ![](https://github.com/TenzT/TenzT.github.io/blob/master/img_markdown/20180503-Introduction-images.bmp)
+    ![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/20180503-Introduction-images.bmp)
     - 而脚本是在CLI中调用对应的二进制执行文件来建立网络：
-    ![](https://github.com/TenzT/TenzT.github.io/blob/master/img_markdown/20180503-Introduction-byfn.bmp)
+    ![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/20180503-Introduction-byfn.bmp)
 
 
 6. 总结：
