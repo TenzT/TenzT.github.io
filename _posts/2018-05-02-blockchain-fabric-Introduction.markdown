@@ -10,12 +10,16 @@ tags:
 ---
 
 > “BlockChain is on the way. ”
+
+
 ## 简介
 Fabric是一个区块链的开源框架
 本文对Fabric进行简单介绍，重点在了解术语（Terminology）企业需求点
 
 ## 参考
 - [HyperLedger-Fabric 官方文档](http://hyperledger-fabric.readthedocs.io/en/latest/index.html)
+
+
 ## 正文
 1. 什么是fabric？  
 fabric 是一个开源的企业级的分布帐平台（DLT，distributed ledger technology）,它通过模块化的架构来允许组件的“插入-运行”来实现这份协议规范。它具有强大的'容器技术'来支持任何主流的语言来开发智能合约。
