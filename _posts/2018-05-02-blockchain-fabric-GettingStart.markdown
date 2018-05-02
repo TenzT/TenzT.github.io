@@ -24,11 +24,13 @@ tags:
 - Go version 1.9.x
 
 ## 正文
+
 1. 删除原有关于fabric的images
-```docker rmi $(docker images | grep hyperledger) ```
+    ```docker rmi $(docker images | grep hyperledger) ```
 2. 在需要存放Fabric例程的目录作为新的Repo，在该目录下执行
     ```curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0```
 下载并解压所有与平台有关的二进制可执行文件。
+![](../img_markdown/20180503-Introduction-binaries.bmp)
 
 3. 将fabric-samples/bin的路径加入环境变量（可选）：在~/.bash_profile里添加
     ```
