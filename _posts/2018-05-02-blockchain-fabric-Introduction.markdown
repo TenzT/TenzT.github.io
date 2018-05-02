@@ -13,7 +13,7 @@ tags:
 
 
 ## 简介
-Fabric是一个区块链的开源框架
+Fabric是一个区块链的开源框架，
 本文对Fabric进行简单介绍，重点在了解术语（Terminology）企业需求点
 
 ## 参考

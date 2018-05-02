@@ -5,8 +5,8 @@
     <description>Stay Hungry, Stay Foolish</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 02 May 2018 12:09:40 +0800</pubDate>
-    <lastBuildDate>Wed, 02 May 2018 12:09:40 +0800</lastBuildDate>
+    <pubDate>Wed, 02 May 2018 19:49:21 +0800</pubDate>
+    <lastBuildDate>Wed, 02 May 2018 19:49:21 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
   </channel>
