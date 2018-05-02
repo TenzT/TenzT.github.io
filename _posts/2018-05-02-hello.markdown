@@ -1,0 +1,14 @@
+---
+layout:     post
+title:      "Welcome to TenzT Blog"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2018-05-02 12:00:00
+author:     "TenzT"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - 生活
+---
+
+> “Yeah It's on. ”
+## 正文
+Tenz 的 Blog 就这么开通了。
