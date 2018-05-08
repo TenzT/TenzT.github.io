@@ -7,6 +7,7 @@ author:     "TenzT"
 header-img: "img/post-bg-2015.jpg"
 tags:
     - BlockChain
+    - HyperLedger-Fabric
 ---
 
 > “Learning By Doing. ”
@@ -43,14 +44,16 @@ tags:
     ```./<fabric-samples的路径>/bin/get-docker-images.sh```
 
 5. 执行byfn例程
-    ```./<fabric-samples的路径>/first-network/byfn.sh```
+    ```./<fabric-samples的路径>/first-network/byfn.sh up```
     - 查看对应源代码可见，该例程的运行环境是 4. 中的Docker镜像：
     ![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/20180503-Introduction-images.bmp)
     - 而脚本是在CLI中调用对应的二进制执行文件来建立网络：
     ![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/20180503-Introduction-byfn.bmp)
 
+6. 执行完byfn例程需要关闭
+    ```./<fabric-samples的路径>/first-network/byfn.sh down```
 
-6. 总结：
+7. 总结：
 使用fabric有两种方式：
 - 一种是使用API，支持Java，node.js，Go。
 - 另一种是CLI模式，在命令行调用二进制文件搭建网络。

@@ -4,9 +4,10 @@ title:      "HyperLedger-Fabric介绍"
 subtitle:   " \"Hello Fabric\""
 date:       2018-05-02 16:09:00
 author:     "TenzT"
-header-img: "img/fabric-bg.jpg"
+header-img: "img/post-bg-2015.jpg"
 tags:
     - BlockChain
+    - HyperLedger-Fabric
 ---
 
 > “BlockChain is on the way. ”
