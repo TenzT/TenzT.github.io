@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "HyperLedger-Fabric介绍"
+title:      "HyperLedger-Fabric架构理解"
 subtitle:   " \"Hello Fabric\""
 date:       2018-05-08 20:09:00
 author:     "TenzT"
