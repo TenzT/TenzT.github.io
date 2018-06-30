@@ -1,0 +1,39 @@
+---
+layout:     post
+title:      "Mysql8 建表时datatime类型出现Invalid default value错误"
+subtitle:   " \"一步一步来啦\""
+date:       2018-06-30 16:26:00
+author:     "TenzT"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - MySQL
+    - Web
+---
+
+# 出现问题：
+在建表时有这样一行
+```
+CREATE TABLE `t_auth_user` (
+   ...
+  `login_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '最后一次登录时间',
+  ...
+}
+```
+当建表时出现 Invalid default value for 'login_time'的错误，
+开始查资料说是因为只有MySQL5.6之前的版本才能用，后面的版本需要改成'timestamp'，改了之后无果，
+于是翻一下官网，结果说的是`datatime还可以用，不过范围是'1000-01-01 00:00:00' to '9999-12-31 23:59:59'`，改了之后就可以啦～
+顺带了解了一下Mysql关于时间的存储
+
+# 科普——MySQL时间存储
+- date，datetime:一个完整的日期格式如下：YYYY-MM-DD HH:MM:SS[.fraction] 即data + time，对于date字段来说，它只支持date部分，如果插入了time部分的内容，它会丢弃掉该部分的内容，并提示一个warning。
+- timestamp:它把客户端插入的时间从当前时区转化为UTC（世界标准时间）进行存储。查询时，将其又转化为客户端当前时区进行返回。
+
+|  |date;datetime|timestamp|
+| - | :-: | -: | 
+|存储方式|"YYYY-MM-DD HH:MM:SS"|需要与UTC进行转换|
+|时间范围|'1000-01-01 00:00:00.000000'--'9999-12-31 23:59:59.999999' | '1970-01-01 00:00:01.000000'--'2038-01-19 03:14:07.999999' | 
+
+
+# 参考资料：
+1. <a href="https://www.cnblogs.com/ivictor/p/5028368.html">MySQL中有关TIMESTAMP和DATETIME的总结--SlowTech</a><br>
+2. <a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html">Mysql8官方文档
