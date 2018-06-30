@@ -36,4 +36,4 @@ CREATE TABLE `t_auth_user` (
 
 # 参考资料：
 1. <a href="https://www.cnblogs.com/ivictor/p/5028368.html">MySQL中有关TIMESTAMP和DATETIME的总结--SlowTech</a><br>
-2. <a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html">Mysql8官方文档</a>
+2. <a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html">Mysql8官方文档</a><br>
