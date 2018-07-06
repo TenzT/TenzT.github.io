@@ -12,13 +12,13 @@ tags:
 
 # 数据结构
 - ArrayList底层是用`数组`存储元素的，元素默认为空，类型为Object
+
 ```
     private static final Object[] EMPTY_ELEMENTDATA = {};
 
     //默认只制定一个引用， 当第一个元素add进来时才默认用DEFAULT_CAPACITY（官方默认为10）
-    private transient Object[] elementData;     //特地查了transient这个关键字，说的是该关键字修饰的变量不参与序列化，
-
-    ....
+    private transient Object[] elementData;     //特地查了transient这个关键字，说的是该关键字修饰的变量不参与序列化
+    //........
     //构造方法
     public ArrayList(int initialCapacity) {
         super();
