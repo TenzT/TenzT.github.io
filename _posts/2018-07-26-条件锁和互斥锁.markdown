@@ -1,0 +1,25 @@
+---
+layout:     post
+title:      "Lock/Condition和synchronized比较"
+subtitle:   "Lock/Condition VS  synchronized"
+date:       2018-07-26 17:43:00
+author:     "TenzT"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - JAVA
+    - 并发
+---
+
+# 锁
+- 
+
+## 本文中提到的两种锁
+
+## 两者的对比
+
+## 应该用哪一种？
+>- 最好既不用Lock/Condition也不实用synchronized，用java.util.concurrent包中诸如阻塞队列中等的机制
+>- 如果不是特别需要用synchronized
+
+## 参考资料
+《Java核心技术 卷一》

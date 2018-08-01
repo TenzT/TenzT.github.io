@@ -1,0 +1,65 @@
+---
+layout:     post
+title:      "Spring学习笔记（一）"
+subtitle:   " Spring--轻量级IOC和AOP框架"
+date:       2018-07-19 15:15:00
+author:     "TenzT"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - J2EE
+    - Spring
+---
+
+# 是什么
+Spring是一个轻量级开源框架，关键点是：
+    1. IOC（控制反转）：松耦合，主要是工厂模式
+    2. AOP（面向切面）：分离应用的业务逻辑与系统级服务（事务）进行内聚性的开发。我的理解就是接口和实现类分离（“做什么”和“怎么做”分离）
+    3. 容器：包含并管理应用对象的配置和生命周期
+
+# 控制反转（IOC）
+- 是什么？
+    - 应用程序本身不负责以来对象的创建和维护，而是由外部容器负责创建和维护。
+    - 实现方式：DI（依赖注入），动态地将谋主依赖关系注入到对象之中。
+    - 配置方式：用XML方式，对象用bean表示。context是bean容器配置的上下文(`PS:Spring的容器并不惟一,其中常用的是应用上下文，抽象接口为ApplicationContext`)
+        - 文件/Classpath: FileSystemXmlAppclicationContext context = new FileSystemXmlAppclicationContext(文件路径)
+        - Web应用：依赖servlet或Listener< listener>....ContextLoaderListener< /listener>  < context>< /context>
+- 怎么用：将bean之间的依赖关系和写作关系配置好，然后利用上下文对象加载进我们的Spring容器
+- Spring注入：在启动Spring容器加载bean配置的时候，完成对变量的复制行为
+    - （常用）设值注入（`需要有set方法`）：在bean的子标签property来配置
+    - 构造注入（调用bean的带field构造器来赋值）：带bean的子标签 < constructor-arg>,且bean要提供构造器
+
+- <a href="https://www.cnblogs.com/chenbenbuyi/p/8166304.html">Spring容器和应用上下文理解</a>
+
+# Bean的装配（手工配置）
+- Bean的作用域(scope)
+    - singleton：单例，每个Bean容器只存在一份
+    - prototype：每次请求创建新的实例，destroy方法不生效
+    - request：每次http请求创建一个实例且仅在当前request内有效
+    - session：同上
+    - global session：基于portlet的web中有效
+- Bean的生命周期
+    - 实现InitializingBean接口或DisposableBean接口
+    - 可以单独某个bean调用，也可以全局配置
+- 自动装配（Autowiring）：Spring容器如何根据上下文加载，装配方式在xml中配置
+    - byname：根据属性名自动装配
+    - byType：如果容器中存在一个与指定属性类型相同的bean，那么将与该属性自动装配
+    - Constructor：应用于构造器参数
+- Aware接口（慎用）：
+    - 实现了Aware接口的bean在被初始化之后，可以获取相应资源
+
+# Bean的装配（注解配置）
+- 在类上面写 @Controller注解等等，作用等同于在xml中配置 < bean>
+- < context:component-scan base-package="包名">扫描注解，可以添加过滤器来包含或排除某些含有特定注解等等的类
+- @Autowired注解为“传统”的setter方法
+
+# 面向切面（AOP）
+- 是什么：通过预编译方式和`运行期动态代理`实现程序功能的统一维护的一种技术，主要功能是日志记录，性能统计，安全控制，事务处理，异常处理等等 <a href="https://www.cnblogs.com/Wolfmanlq/p/6036019.html">理解AOP思想</a>
+- 即将非主要业务的而又重复的功能分离成专有的模块，以“切面”的方式横跨多个任务
+- 概念：
+    - 切面（Advisor）：是AOP中的一个术语，表示从业务逻辑中分离出来的横切逻辑，比如性能监控，日志记录，权限控制等。这些功能都可以从核心的业务逻辑中抽离出去。可以解决代码耦合问题，职责更加单一。封装了增强和切点。
+    - 增强（Advice）：增强代码的功能的类，横切到代码中。
+    - 目标：目标方法（JDK代理）或目标类（CGLIB代理）
+    - 代理：JDK代理，CGLIB代理。或是通过 ProxyFactory 类生产。
+    - 切点：通过一个条件来匹配要拦截的类，这个条件称为切点。如拦截所有带 Controller 注解的类。增强的条件。
+    - 连接点：作为增强方法的入参，可以获取到目标方法的信息。
+- 实现：纯Java实现，无须特殊的编译过程，不需要控制类加载器层次；目前只支持方法执行连接点；

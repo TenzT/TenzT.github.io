@@ -63,7 +63,7 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，陪陪女友。"
+sidebar-about-description: "不会算法的码农不是一个好的架构师。"
 sidebar-avatar: /img/avatar-tenz.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
