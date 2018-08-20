@@ -2,7 +2,7 @@
 layout:     post
 title:      "在Mac上运行Fabric掉坑记录"
 subtitle:   "e2e_cli"
-date:       2018-07-26 17:43:00
+date:       2018-08-18 17:43:00
 author:     "TenzT"
 header-img: "img/post-bg-2015.jpg"
 tags:
