@@ -10,6 +10,7 @@ tags:
 	- HyperLedger-Fabric
 ---
 
+
 # 在Mac上运行Fabric掉坑记录
 1. gopath问题：
 应该在.bash_profile文件里写好gopath的位置(比如说我的是$HOME/go),然后fabric的git下到go/src/github.com/hyperledger里面
