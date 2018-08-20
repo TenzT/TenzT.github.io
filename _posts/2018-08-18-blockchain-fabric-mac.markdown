@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "在Mac上运行Fabric掉坑记录"
+title:      "在 Mac上 运行 Fabric 掉坑记录"
 subtitle:   "e2e_cli"
 date:       2018-08-18 17:43:00
 author:     "TenzT"
