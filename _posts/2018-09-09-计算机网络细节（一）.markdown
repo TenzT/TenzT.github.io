@@ -1,0 +1,69 @@
+---
+layout:     post
+title:      "计算机网络细节（一）"
+subtitle:   "加深理解，扩展本科所学"
+date:       2018-09-09 00:40:00
+author:     "TenzT"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - 计算机网络
+---
+
+# 简介
+本科时曾学过计算机网络，但是课本过于理论未能和实际使用很好结合，因此开次此博客用于记录《图解TCP/IP》的阅读笔记，并扩展本科所学的知识，方便自己查阅。
+
+# 网络基础知识
+- 任播：在特定的多台主机中选出一台作为接收端，特点是从目标主机群中选择一台最符合网络条件的主机作为目标主机发送消息。e.g. 一年一班的`哪位同学`过来一下（任播） 一年一班的同学过来一下（多播）
+- 地址的层次性（分层的思想）：当地址的总数越来越多时，需要分层来高效从中找出通信的目标地址（联想一下查找树），MAC地址没有分层，IP地址才有（靠网络号分层，同一网络号的主机处于相同网段）
+
+# 数据链路层
+- 数据链路，有时也指以太网、无线局域网等通信手段，可以称为一个“网络”
+- 网段：一个被中继器相连的网络，逻辑上（即网络层上）可以看作统一网段（即有相同的IP网络号）
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/relay_network.png)
+- MAC地址不是全球唯一的，只需要保证同一网络下MAC地址唯一即可
+- 通信介质
+    - 共享介质网络：多个设备共享一个通信介质，代表是总线型网络，采用半双工通信，冲突检测方法为 CSMA/CD
+    ![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/shared_media.png)
+    - `非共享介质网络：对介质采取专用的一种传输控制方式，交换机就是典型，一对一全双工通信，不需要CSMA/CD`，是现在通用的
+    ![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/unshared_media.png)
+    - 无论是上述哪一种，连接在同一介质上的都算作一个网络
+- 以太网交换机是持有多个端口的网桥，有 MAC-端口 映射表，通过自学习（拆包，把源MAC地址与进来的端口绑定）来修改
+- 以太网早期用同一根同轴电缆的共享介质型，现在一般都采用终端与交换机之间独占电缆的方式
+
+# IP
+- 为什么需要IP地址？不可能让所有主机都连接在同一个数据链路层上，需要分开多个局域网，再把各个局域网互联起来
+- 格式：网络号:主机号，早期用ABCD四种类型，到后面直接用子网
+- 子网掩码：连续的1和连续的0组成，1的位数表示表示网络号所需要的位数，因此其中一种表示方法为 网络号:主机号/子网位数 
+    - 最开始子网掩码是在ABCD类网络号后多“借”几位用于划分子网
+    - 后面采用CIDR之后，采用任意长度分割IP地址
+- 与数据链路层的区别：数据链路层只负责某一个区间的通信传输，即根据MAC地址转发到下一个路由或主机，而路由器则有路由控制表，记录网络号与下一跳的映射关系
+- 全局地址和似有地址：全局地址指整个公网上传播用的地址，由于无法满足网络上所有主机的IP唯一，因此允许网络内地址唯一即可，该地址为似有地址。如果配有私有地址的主机想接入互联网，可使用NAT方式
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/private_public_ip.png)
+- 路由控制表：记录 网络地址与下一跳路由（用路由的IP标识）的映射PS，不一定是直连的网络，就好像我知道通过坐飞机最终能够到美国唐人街，但不代表说飞机“直达”唐人街，中间转乘的车也可以是路由
+- 路由聚合(用于节省数据库空间和提高转发效率)：聚合算法：列出到达同一路由器的各子网的地址，用2进制表示，从第1位逐位比较，将从开始不相同的比特位末尾填充为0，则为汇总后的网段的地址
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/route_aggregation.png)
+- IPv6:128比特
+
+# IP相关技术
+- DNS系统：
+    - 管理主机名和IP地址之间的映射
+    - 域名分层，每层域名都有主机管理，且知晓该层以下分层中所有域名服务器的IP地址。根域名服务器知道所有的
+    - DNS解析过程：先在本地hosts找，不行再问自己的域名服务器，域名服务器找不到再向上找，直到根节点就应该能找到了，最后找到目标主机所在的域的域名服务器，其向本地域名服务器返回目标主机的IP地址，则可以相互通信了
+- ARP：MAC地址和IP地址映射
+    - 工作机制：源主机知道目标IP，但是不知道其MAC地址，于是广播一个ARP包，目标主机收到后，发送ARP响应包（其中包含MAC地址），于是源主机基于可以绑定了
+- DHCP：用于实现自动分配IP地址
+    - DHCP中继代理：由宽带路由器充当DHCP的橘色
+- NAT：公共IP和私有IP映射，NAT路由器对外只有一个IP，利用不同端口号绑定不同私有IP，路由器里保存有转化表
+    - 缺陷：被动连接（无法从外部发起）；转换产生开销；要做容灾
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/NAT1.png)
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/NAT2.png)
+- ICMP：辅助IP，由IP包头的协议来指明，常用有4类
+    - 目标不可达
+    - 重定向：若路由器持有更好的路由消息的时，会给出更好的路由
+    - 超时：TTL寿命，避免循环
+    - 回送：成功或单纯回送，ping指令的原理
+![](https://raw.githubusercontent.com/TenzT/TenzT.github.io/master/img_markdown/图解TCPIP/redirect.png)
+- IP隧道：VPN代理的原理，把整个IP包（头和数据部分）当作代理IP的数据包
+
+# 参考：
+- 《图解TCP/IP》
