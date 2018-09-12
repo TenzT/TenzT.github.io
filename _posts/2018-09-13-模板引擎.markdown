@@ -1,0 +1,47 @@
+---
+layout:     post
+title:      "模板引擎"
+subtitle:   ""
+date:       2018-09-13 00:03:00
+author:     "TenzT"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - Web
+---
+
+# 背景知识
+- 在传统的Web应用开发中，传统的后端MVC架构下，需要完成前后端的功能，这时一般用到模板引擎，之前一直用的是JSP，JSP在后台转成class再生成HTML静态网页,其实背后干的是拼接字符串的体力活。模板引擎就是利用正则表达式识别模板标识，并利用数据替换其中的标识符。
+![](http://static.open-open.com/lib/uploadImg/20161031/20161031105841_824.gif)
+![](https://oss-cn-hangzhou.aliyuncs.com/yqfiles/6c258773c5fc6fca7229b978a7a27b8ff1b326f0.png)
+- ajax的出现使得前后端分离，后端专注于业务逻辑，给前端提供接口，而前端通过ajax向后端请求数据，然后动态渲染页面，因此许多优秀的前端模板引擎出现。
+- 但是前后端分离最大的缺点是不利于搜索引擎优化
+
+# 对比
+- JSP：
+    - 优点：
+        1. 可以写Java带啊吗
+        2. 支持JSP tag和EL
+    - 缺点：
+        1. 如果使用不当把过多业务逻辑写进JSP，会破坏MVC架构
+        2. 每次调试都需要在线，不利于前端开发
+- Velocity：
+    - 优点：
+        1. 严格MVC分离
+    - 缺点：
+        1. 不是官方标准
+        2. SpringBoot1.5之后不支持
+- Freemarker（推荐）:
+    - 优点：
+        1. 性能好
+        2. 支持表达式语言
+        3. 支持宏定义（类似jsp标签）
+        4. 内置大量常用功能，使用非常方便（比如日期处理）
+    - 缺点：
+        1. 不是官方标准
+
+# 拓展
+- 单纯的后端以及前端模板引擎方法都有一定的局限性，NOde的出现让我们有了第三种选择，Node成为中间层，即后台单纯提供数据，Node用模板引擎渲染页面。这样一来，后台提供的接口，不仅 Web 端可以使用，APP，浏览器也可以调用，同时页面 Node 直出也不会影响 SEO，并且前后端也分离，不失为一种比较完美的方案。
+
+# 参考：
+- https://blog.csdn.net/wanghjbuf/article/details/52016384
+- https://www.cnblogs.com/dojo-lzz/p/5518474.html
